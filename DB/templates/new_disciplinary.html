@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block content %}
+<link rel="stylesheet" href="../static/css/new_rez.css">
+<script src="https://snipp.ru/cdn/jquery/2.1.1/jquery.min.js"></script>
+<main>
+    <div id="container">
+        <h1>&bull; Добавить дисциплинарку &bull;</h1>
+        <div class="underline">
+        </div>
+        <form action="#" method="post" id="contact_form" enctype="multipart/form-data">
+            <br>
+            <div class="subject">
+                <label for="floor"></label>
+                <select placeholder="Проживающий" name="resident" id="resident_input" required>
+                    <option value="0" disabled hidden selected>Проживающий</option>
+                    {% for i in resid %}
+                    <option value="{{i[0]}}">{{i[1]+" "+i[2]+" "+i[3]}}</option>
+                    {% endfor%}
+                </select>
+            </div>
+            <div class="telephone">
+      <label for="date"></label>
+      <input type="text" placeholder="Причина" name="reason" id="reason_input" required>
+    </div>
+
+          <br>
+            <div class="submit">
+                <input type="submit" value="Добавить" id="form_button" style="background-color: #10366A; color: #fff"/>
+            </div>
+        </form><!-- // End form -->
+    </div><!-- // End #container -->
+</main>
+{% endblock %}

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" id="style_header_h" href="../static/css/header_intr.css">
+  </head>
+  <body class="page">
+    <div class="content">
+        <header class="header">
+            <div class="header__logo">Общежите№6</div>
+            <div class="header__logomin">Информация для комендантов</div>
+            <div class="header__contacts">
+                <button class="header_phone"></button>
+                <p class="header__text header__number">8 999 555 3322</p>
+                <button class="header_mail"></button>
+                <p class="header__text">support@obs№6.ru</p>
+            </div>
+        </header>
+        <div class="header__nav-container">
+          <div class="header__nav">
+            <button class="button home-button"  id="sidebar-btn"></button>
+            {% for i in navig %}
+            <button class="button wtf-button"></button>
+            <p class="header__nav-text">{{ i }}</p>
+            {% endfor %}
+          </div>
+        {% if session['id_user'] %}
+          <div class="header__nav">
+              <a href="/exit" class="exit_img"></a>
+
+          </div>
+        {% endif %}
+        </div>
+
+{% block content -%}
+
+{% endblock -%}
+        <link rel="stylesheet" id="style_header_f" href="../static/css/header_intr.css">
+        <footer class="footer">
+          <div class="footer__nav">
+            <img src="../static/img/mospolytech-logo-white.png" alt="" class="footer__logo">
+            <ul class="footer__links">
+              <li><a class="footer__link">Сайт Московского Политеха</a></li>
+              <li><a class="footer__link">Сайт СДО</a></li>
+              <li><a class="footer__link">Учащимся</a></li>
+              <li><a class="footer__link">Правила пользования платформой</a></li>
+              <li><a class="footer__link">О нас</a></li>
+              <li><a class="footer__link">Помощь</a></li>
+              <li><a class="footer__link">Все контакты</a></li>
+            </ul>
+          </div>
+          <div class="footer__about">
+            <div class="footer__container">
+              <p class="footer__copyhright"> &#169;Общежите №6, 2023</p>
+              <p class="footer__adress">Адрес: г.Москва, ул. Бориса Галушкина, д. 9.</p>
+
+            </div>
+            <div class="footer__contacts">
+
+                  <button class="header_phone"></button>
+                <p class="header__text header__number">8 999 555 3322</p>
+
+                <button class="header_mail"></button>
+                <p class="header__text">support@obs№6.ru</p>
+              </div>
+          </div>
+        </footer>
+        <sidebar class="sidebar" id="sidebar" hidden>
+          <button id="closeSidebar" class="close_sidebar"></button>
+            <button class="sidebar_logo"></button>
+          <ul class="sidebar__buttons">
+          <li>
+              <button class="sidebar__button"><a href="/">Список Проживающих</a></button>
+            </li>
+                <li>
+              <button class="sidebar__button"><a href="/contracts">Список договоров</a></button>
+            </li>
+              <li>
+              <button class="sidebar__button"><a href="/reference">Список справок</a></button>
+            </li>
+              <li>
+              <button class="sidebar__button"><a href="/disciplinary">Список дисциплинарок</a></button>
+            </li>
+              <li>
+              <button class="sidebar__button"><a href="/equipment">Список оборудования</a></button>
+            </li>
+            <li>
+              <button class="sidebar__button"><a href="/new_rez">Добавить проживающего</a></button>
+            </li>
+              <li>
+              <button class="sidebar__button"><a href="/new_contract">Добавить оборуд.</a></button>
+            </li>
+            <li>
+              <button class="sidebar__button"><a href="/new_reference">Добавить справку</a></button>
+            </li>
+              <li>
+              <button class="sidebar__button"><a href="/new_disciplinary">Добавить дисциплинарку</a></button>
+            </li>
+
+
+          </ul>
+        </sidebar>
+    </div>
+    <script src="../static/js/index.js" >
+    </script>
+  </body>
+</html>

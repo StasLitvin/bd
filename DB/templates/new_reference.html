@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block content %}
+<link rel="stylesheet" href="../static/css/new_rez.css">
+<script src="https://snipp.ru/cdn/jquery/2.1.1/jquery.min.js"></script>
+<main>
+    <div id="container">
+        <h1>&bull; Добавить справку &bull;</h1>
+        <div class="underline">
+        </div>
+        <form action="#" method="post" id="contact_form" enctype="multipart/form-data">
+                      <div class="email" style="margin-right: 55%; margin-bottom: 8%">
+                <label class="input-file">
+                    <input type="file" name="file">
+                    <span>Выберите файл</span>
+                </label></div>
+            <br>
+            <div class="subject">
+                <label for="floor"></label>
+                <select placeholder="Проживающий" name="resident" id="resident_input" required>
+                    <option value="0" disabled hidden selected>Проживающий</option>
+                    {% for i in resid %}
+                    <option value="{{i[0]}}">{{i[1]+" "+i[2]+" "+i[3]}}</option>
+                    {% endfor%}
+                </select>
+            </div>
+            <div class="subject">
+                <label for="floor"></label>
+                <select placeholder="Комната" name="reference" id="reference_input" required>
+                    <option value="0" disabled hidden selected>Справка</option>
+                    {% for i in reference %}
+                    <option value="{{i[0]}}">{{i[1]}}</option>
+                    {% endfor%}
+                </select>
+            </div>
+
+          <br>
+            <div class="submit">
+                <input type="submit" value="Добавить" id="form_button" style="background-color: #10366A; color: #fff"/>
+            </div>
+        </form><!-- // End form -->
+    </div><!-- // End #container -->
+</main>
+<script>$('.input-file input[type=file]').on('change', function () {
+    let file = this.files[0];
+    $(this).next().html(file.name);
+});</script>
+{% endblock %}

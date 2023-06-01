@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block content %}
+<link rel="stylesheet" href="../static/css/home.css">
+<main>
+    <form method="post">
+        <div class="search">
+            <input type="text" id="search__input" name="search__input" placeholder="Поиск" value=""/>
+            <button type="submit" class="serch" id="button"></button>
+            <div class="search__span">Всего выбрано проживающих: {{ count_res }}</div>
+        </div>
+
+    </form>
+
+    <form method="post">
+
+    <table class="table_blur countLines">
+        <tr>
+            <th>№</th>
+            <th>Фамилия</th>
+            <th>Имя</th>
+            <th>Отчество</th>
+            <th>Справка</th>
+            <th>Дата сдачи</th>
+        </tr>
+          {% for i in data%}
+        <tr>
+            <td></td>
+            <td>{{i[2]}}</td>
+            <td>{{i[3]}}</td>
+            <td>{{i[4]}}</td>
+            <td><a href="../static/dok/{{i[1]}}" class="table-input">{{i[5]}}</a></td>
+            <td >{{i[6]}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+        </form>
+        <button  class="custom-btn btn-2 floated" style="margin: 1% 0 0 91.5%; white-space: nowrap;" ><a href="/new_reference" style="color: #fff">Добавить</a></button>
+</main>
+{% endblock %}

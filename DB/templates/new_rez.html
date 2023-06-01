@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block content %}
+<link rel="stylesheet" href="../static/css/new_rez.css">
+<main>
+<div id="container">
+  <h1>&bull; Добавить проживающего &bull;</h1>
+  <div class="underline">
+  </div>
+  <form action="#" method="post" id="contact_form">
+    <div class="name">
+      <label for="name"></label>
+      <input type="text" placeholder="Фамилия" name="name" id="name_input" required>
+    </div>
+    <div class="email">
+      <label for="surname"></label>
+      <input type="text" placeholder="Имя" name="surname" id="surname_input" required>
+    </div>
+    <div class="name">
+      <label for="fatherland"></label>
+      <input type="text" placeholder="Отчество" name="fatherland" id="fatherland_input" required>
+    </div>
+    <div class="email">
+      <label for="group"></label>
+      <input type="text" placeholder="Группа" name="group" id="group_input"  onfocusout="int_prov(this.id)">
+    </div>
+    <div class="telephone">
+      <label for="name"></label>
+      <input type="text" placeholder="Номер телефона" name="phone" id="phone_input" onfocusout="phone_test()" required>
+    </div>
+    <div class="date">
+      <label for="date"></label>
+      <input type="date" placeholder="Дата рождения" name="date" id="date_input" required>
+    </div>
+    <div class="subject">
+      <label for="floor"></label>
+      <select placeholder="Пол" name="floor" id="floor_input" required>
+        <option disabled hidden selected>Пол</option>
+        <option id="1" name="1">М</option>
+        <option id="0" name="0">Ж</option>
+      </select>
+    </div>
+    <div class="subject">
+                <label for="floor"></label>
+                <select placeholder="Комната" name="rooms" id="room_input" required>
+                    <option value="0" disabled hidden selected>Комната</option>
+                    {% for i in rooms %}
+                    <option value="{{i[0]}}">{{i[1]}}{{i[2]}}{{i[3]}}</option>
+                    {% endfor%}
+                </select>
+            </div>
+    <br>
+    <div class="submit">
+      <input type="submit" value="Добавить" id="form_button" style="background-color: #10366A; color: #fff" />
+    </div>
+  </form><!-- // End form -->
+</div><!-- // End #container -->
+</main>
+{% if error%}
+<script>
+  alert("{{error}}")
+</script>
+{% endif %}
+{% endblock %}
