@@ -8,7 +8,7 @@ from base import residents, residents_search, residents_upset, residents_input, 
     equipments_selctor, contract_input, contract_equipment_input, contract_room_input, contract_search, contracts, \
     contracts_search, room_upset, equipment, equipment_search, equipment_upset, type_reference, reference_input, \
     reference, disciplinary_input, disciplinary, reference_search, disciplinary_search, file_create, \
-    contract_equipment_prov, residents_search_min,rooms_name
+    contract_equipment_prov, residents_search_min,rooms_name,residents_ser
 from werkzeug.utils import secure_filename
 from mail import send_mail, send_password_reset_mail
 
@@ -61,6 +61,40 @@ def base():
                                data=residents())
 
 
+@app.route('/base/<id>', methods=['GET', 'POST'])
+def base_id(id):
+    if request.method == "GET":
+        return render_template('Home.html', title="Список проживающих",
+                               href=href_intr,
+                               navig=["Список проживающих"],
+                               count_res=len(residents_ser(id)),
+                               data=residents_ser(id),
+                               d=1)
+    if request.method == "POST":
+
+        if "search__input" in request.form:
+            return render_template('Home.html', title="Список проживающих",
+                                   href=href_intr,
+                                   navig=["Список проживающих"],
+                                   count_res=len(residents_search(request.form["search__input"])),
+                                   data=residents_search(request.form["search__input"]))
+        else:
+            s = {}
+            for i in request.form:
+                if i.split("/")[1] in s:
+                    s[i.split("/")[1]] += [request.form[i]]
+                else:
+                    s[i.split("/")[1]] = [request.form[i]]
+            print(request.form)
+            print(s)
+            residents_upset(s)
+        return render_template('Home.html', title="Список проживающих",
+                               href=href_intr,
+                               navig=["Список проживающих"],
+                               count_res=len(residents()),
+                               data=residents())
+
+
 @app.route('/new_rez', methods=['GET', 'POST'])
 def new_rez():
     if request.method == "GET":
@@ -76,7 +110,7 @@ def new_rez():
         if (residents_input(list(
                 (request.form["name"], request.form["surname"], request.form["fatherland"], request.form["phone"],
                  request.form["group"], p, request.form["date"], 0)))) == 1:
-            print("saasdsa", residents_search(request.form["name"]))
+            print("saasdsa", residents_search_min(request.form["name"])[-1][0])
             id_rez = residents_search_min(request.form["name"])[-1][0]
             name = request.form["name"] + request.form["surname"] + request.form["fatherland"]
             name_room=rooms_name(request.form["rooms"])

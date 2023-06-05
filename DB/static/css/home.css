@@ -1,13 +1,13 @@
 
 .serch{
   border: none;
-  background-image: url(../img/search.png);
+  background-image: url(../img/search-icon.svg);
   background-repeat: no-repeat;
   background-color: inherit;
   position: relative;
   width: 20px;
-  height: 25px;
-  bottom: 15px;
+  height: 29px;
+  bottom: 14px;
   right: 435px;
 }
 .search {

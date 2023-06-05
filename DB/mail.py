@@ -1,5 +1,6 @@
 import smtplib
 import config
+import os
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from platform import python_version

@@ -16,16 +16,15 @@ def data_con():
 def file_create(text, title):
     pdf = FPDF()
     pdf.add_page()
-    pdf.add_font('DejaVu', '', 'DejaVuSansCondensed.ttf', uni=True)
+    pdf.add_font('DejaVu', '', "./DejaVuSansCondensed.ttf", uni=True)
     pdf.set_font('DejaVu', '', 14)
     pdf.multi_cell(200, 20, txt=text)
-    pdf.output("static/dok/" + title + ".pdf")
-
-
+    pdf.output("./static/dok/" + title + ".pdf")
+file_create("dsadasda","sadasda")
 def residents():
     connection = data_con()
     cursor = connection.cursor()
-    quary = '''SELECT residents.id,residents.surname,residents.name,residents.fatherland,residents.phone,residents.groupp,residents.floor,residents.date_birth,residents.elder,contracts.contract,rooms.floor,rooms.block,rooms.room 
+    quary = '''SELECT residents.id,residents.surname,residents.name,residents.fatherland,residents.phone,residents.groupp,residents.floor,residents.date_birth,residents.elder,contracts.contract,rooms.floor,rooms.block,rooms.room,rooms.id 
     FROM residents
     INNER JOIN `contracts` ON residents.id=contracts.id_rez 
     INNER JOIN `room_cont` ON room_cont.id_con=contracts.id 
@@ -36,13 +35,28 @@ def residents():
     cursor.close()
     connection.close()
     return result
-print(residents())
+def residents_ser(id):
+    connection = data_con()
+    cursor = connection.cursor()
+    quary = f'''SELECT residents.id,residents.surname,residents.name,residents.fatherland,residents.phone,residents.groupp,residents.floor,residents.date_birth,residents.elder,contracts.contract,rooms.floor,rooms.block,rooms.room,rooms.id
+    FROM residents
+    INNER JOIN `contracts` ON residents.id=contracts.id_rez 
+    INNER JOIN `room_cont` ON room_cont.id_con=contracts.id 
+    INNER JOIN `rooms` ON rooms.id=room_cont.id_room 
+    WHERE rooms.id={id}'''
+    cursor.execute(quary)
+    result = cursor.fetchall()
+    connection.commit()
+    cursor.close()
+    connection.close()
+    return result
 
+print(residents_ser(1))
 def residents_search(search):
     connection = data_con()
     search = search.lower()
     cursor = connection.cursor()
-    quary = '''SELECT residents.id,residents.surname,residents.name,residents.fatherland,residents.phone,residents.groupp,residents.floor,residents.date_birth,residents.elder,contracts.contract,rooms.floor,rooms.block,rooms.room 
+    quary = '''SELECT residents.id,residents.surname,residents.name,residents.fatherland,residents.phone,residents.groupp,residents.floor,residents.date_birth,residents.elder,contracts.contract,rooms.floor,rooms.block,rooms.room,rooms.id
         FROM residents
         INNER JOIN `contracts` ON residents.id=contracts.id_rez 
         INNER JOIN `room_cont` ON room_cont.id_con=contracts.id 
